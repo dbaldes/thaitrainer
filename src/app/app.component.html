@@ -1,3 +1,6 @@
-<h1>
-  {{title}}
-</h1>
+<div class="cbuttons" >
+  <button *ngFor="let consonant of consonants" (click)="gotoConsonant(consonant.id)" >{{consonant.character}}</button>
+</div>
+<div class="cdisplay">
+<router-outlet></router-outlet>
+</div>

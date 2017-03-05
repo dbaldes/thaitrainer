@@ -1,0 +1,10 @@
+div.consonant {
+  font-size: 128pt;
+}
+div.roman {
+  font-size: 26pt;
+}
+div.charclass {
+  margin-top: 5px;
+  font-size: 14pt;
+}
