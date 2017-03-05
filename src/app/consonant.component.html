@@ -1,6 +1,20 @@
 <div *ngIf="consonant" >
   <div class="consonant" >{{consonant.character}}</div>
-  <div class="roman" >{{consonant.roman}}</div>
-  <div class="phonetic" >{{consonant.phonetic}}</div>
-  <div class="charclass" >{{characterClass}}</div>
+  <div *ngIf="showPhonetic" class="roman"
+       [class.wrong]="wrongPhonetic"
+       [class.right]="rightPhonetic"
+       >{{consonant.roman}}</div>
+  <div *ngIf="showPhonetic" class="phonetic"
+       [class.wrong]="wrongPhonetic"
+       [class.right]="rightPhonetic"
+       >{{consonant.phonetic}}</div>
+  <div *ngIf="showClass" class="charclass"
+       [class.wrong]="wrongClass"
+       [class.right]="rightClass"
+       >{{characterClass}}</div>
+  <div *ngIf="guessingClass && !showClass" class="charclass" >
+    <button (click)="guessClass('l')" >low</button>
+    <button (click)="guessClass('m')" >middle</button>
+    <button (click)="guessClass('h')" >high</button>
+  </div>
 </div>

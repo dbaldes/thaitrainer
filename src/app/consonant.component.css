@@ -8,3 +8,9 @@ div.charclass {
   margin-top: 5px;
   font-size: 14pt;
 }
+div.wrong {
+  color: red;
+}
+div.right {
+  color: green;
+}
