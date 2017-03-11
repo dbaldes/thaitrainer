@@ -59,6 +59,18 @@ export class ConsonantComponent implements OnInit {
     this.gameService.next();
   }
 
+  public next(): void {
+    let id = this.consonant.id + 1;
+    if (id > 44) { id = 1; }
+    this.router.navigate(['/consonant', id]);
+  }
+
+  public prev(): void {
+    let id = this.consonant.id - 1;
+    if (id == 0) { id = 44; }
+    this.router.navigate(['/consonant', id]);
+  }
+
   public showScore(): void {
     this.router.navigate(['/result']);
   }

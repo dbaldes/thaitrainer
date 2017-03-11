@@ -14,7 +14,7 @@
 <div *ngIf="!gameState().isRunning()" >
   <div class="gamebuttons" >
     <button (click)="startGameClass()" >Guess Classes</button>
-    <button (click)="startGamePhonetic()" >Guess Phonetics</button>
+   <!-- <button (click)="startGamePhonetic()" >Guess Phonetics</button> -->
   </div>
   <div class="cbuttons" >
     <button *ngFor="let consonant of consonants" (click)="gotoConsonant(consonant.id)" >{{consonant.character}}</button>

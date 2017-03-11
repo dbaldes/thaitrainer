@@ -31,4 +31,8 @@
       <button (click)="showScore()" >Show Result</button>
     </div>
   </div>
+  <div *ngIf="!gameState.isRunning()" class="gameNav" >
+      <button (click)="prev()" >&larr;</button>
+      <button (click)="next()" >&rarr;</button>
+  </div>
 </div>
