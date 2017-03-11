@@ -1,5 +1,22 @@
-<div class="cbuttons" >
-  <button *ngFor="let consonant of consonants" (click)="gotoConsonant(consonant.id)" >{{consonant.character}}</button>
+<div *ngIf="gameState().isRunning()" >
+  <div class="gamebuttons" >
+    <button (click)="browse()" >Stop Game</button>
+    <label for="gRight">Good:</label>
+    <span id="gRight">{{gameState().correctGuesses}}</span>
+    <label for="gWrong">Bad:</label>
+    <span id="gWrong">{{gameState().guesses - gameState().correctGuesses}}</span>
+    <label for="gScore">Score:</label>
+    <span id="gScore">{{gameState().score() | percent}}</span>
+  </div>
+</div>
+<div *ngIf="!gameState().isRunning()" >
+  <div class="gamebuttons" >
+    <button (click)="startGameClass()" >Guess Classes</button>
+    <button (click)="startGamePhonetic()" >Guess Phonetics</button>
+  </div>
+  <div class="cbuttons" >
+    <button *ngFor="let consonant of consonants" (click)="gotoConsonant(consonant.id)" >{{consonant.character}}</button>
+  </div>
 </div>
 <div class="cdisplay">
 <router-outlet></router-outlet>

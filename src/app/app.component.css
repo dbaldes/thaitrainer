@@ -5,10 +5,19 @@ h1 {
 }
 div.cbuttons {
   width: 100%;
-  text-align: center;
+  text-align: left;
 }
 div.cbuttons button {
   margin: 2px;
+}
+div.gamebuttons {
+  width: 100%;
+  text-align: left;
+}
+div.gamebuttons button {
+  margin: 2px;
+  font-size: 14pt;
+  font-weight: bold;
 }
 div.cdisplay {
   text-align: center;

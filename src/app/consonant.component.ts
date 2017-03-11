@@ -5,7 +5,7 @@ import { Location }                 from '@angular/common';
 import 'rxjs/add/operator/switchMap';
 
 import { Consonant } from './consonant';
-import { ConsonantService } from './consonant.service'
+import { GameService, GameMode, GameState } from './game.service'
 
 @Component({
   moduleId: module.id,
@@ -20,31 +20,17 @@ export class ConsonantComponent implements OnInit {
 
   characterClass: string;
 
-  guessingPhonetic = false;
-  guessingClass = true;
-
-  showClass = true;
-  showPhonetic = true;
- 
-  wrongClass = false;
-  rightClass = false;
-
-  wrongPhonetic = false;
-  rightPhonetic = false;
+  gameState: GameState;
 
   constructor(
-    private consonantService: ConsonantService,
+    private gameService: GameService,
     private route: ActivatedRoute,
-    private location: Location) { }
+    private location: Location) {
+
+    this.gameState = gameService.gameState;
+  }
 
   setConsonant(consonant: Consonant) {
-    this.showClass = !this.guessingClass;
-    this.showPhonetic = !this.guessingPhonetic;
-    this.wrongClass = false;
-    this.rightClass = false;
-    this.wrongPhonetic = false;
-    this.rightPhonetic = false;
-
     this.consonant = consonant;
     this.characterClass = 
         consonant.charclass == 'l' ? 'low' 
@@ -52,29 +38,33 @@ export class ConsonantComponent implements OnInit {
             : 'high';
   }
 
-  ngOnInit(): void {
-    this.route.params
-      .switchMap((params: Params) => this.consonantService.getConsonant(+params['id']))
-      .subscribe(consonant => this.setConsonant(consonant));
+
+  onChangeGameState(gameState: GameState) {
+    this.gameState = gameState;
+    this.setConsonant(this.gameState.consonant);
   }
 
+  ngOnInit(): void {
+     this.route.params
+      .switchMap((params: Params) => this.gameService.getConsonant(+params['id']))
+      .subscribe(consonant => this.setConsonant(consonant));
+     this.gameService.stateChanged.subscribe(
+      (gameState) => {
+        this.onChangeGameState(gameState);
+      }
+     );
+  }
+
+  public gameNext(): void {
+    this.gameService.next();
+  }
 
   guessClass(guess: string): void {
-    if (guess === this.consonant.charclass) {
-      this.rightClass = true;
-    } else {
-      this.wrongClass = true;
-    }  
-    this.showClass = true;
+    this.gameService.guess(guess === this.consonant.charclass);
   }
 
   guessPhonetic(guess: string): void {
-    if (guess === this.consonant.roman.substring(0,1)) {
-      this.rightPhonetic = true;
-    } else {
-      this.wrongPhonetic = true;
-    }
-    this.showPhonetic = true;
+    this.gameService.guess(guess === this.consonant.roman.substring(0,1));
   }
 
   goBack(): void {

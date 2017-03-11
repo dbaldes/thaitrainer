@@ -1,20 +1,25 @@
 <div *ngIf="consonant" >
   <div class="consonant" >{{consonant.character}}</div>
-  <div *ngIf="showPhonetic" class="roman"
-       [class.wrong]="wrongPhonetic"
-       [class.right]="rightPhonetic"
+  <div *ngIf="!(gameState.isGuessPhonetic() && gameState.guessing)" class="roman"
+       [class.wrong]="gameState.isGuessPhonetic() && gameState.wrong"
+       [class.right]="gameState.isGuessPhonetic() && !gameState.wrong"
        >{{consonant.roman}}</div>
-  <div *ngIf="showPhonetic" class="phonetic"
-       [class.wrong]="wrongPhonetic"
-       [class.right]="rightPhonetic"
+  <div *ngIf="!(gameState.isGuessPhonetic() && gameState.guessing)" class="phonetic"
+       [class.wrong]="gameState.isGuessPhonetic() && gameState.wrong"
+       [class.right]="gameState.isGuessPhonetic() && !gameState.wrong"
        >{{consonant.phonetic}}</div>
-  <div *ngIf="showClass" class="charclass"
-       [class.wrong]="wrongClass"
-       [class.right]="rightClass"
+  <div *ngIf="!(gameState.isGuessClass() && gameState.guessing)" class="charclass"
+       [class.wrong]="gameState.isGuessClass() && gameState.wrong"
+       [class.right]="gameState.isGuessClass() && !gameState.wrong"
        >{{characterClass}}</div>
-  <div *ngIf="guessingClass && !showClass" class="charclass" >
-    <button (click)="guessClass('l')" >low</button>
-    <button (click)="guessClass('m')" >middle</button>
-    <button (click)="guessClass('h')" >high</button>
+  <div *ngIf="gameState.isGuessClass()" class="charclass" >
+    <div *ngIf="gameState.guessing" >
+      <button (click)="guessClass('l')" >low</button>
+      <button (click)="guessClass('m')" >middle</button>
+      <button (click)="guessClass('h')" >high</button>
+    </div>
+    <div *ngIf="!gameState.guessing" >
+      <button (click)="gameNext()" >&rArr;</button>
+    </div>
   </div>
 </div>
