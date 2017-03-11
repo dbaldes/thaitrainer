@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { ConsonantComponent } from './consonant.component';
+import { ResultComponent } from './result.component';
 import { GameService } from './game.service';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -11,7 +12,8 @@ import { AppRoutingModule } from './app-routing.module';
 @NgModule({
   declarations: [
     AppComponent,
-    ConsonantComponent
+    ConsonantComponent,
+    ResultComponent
   ],
   imports: [
     BrowserModule,

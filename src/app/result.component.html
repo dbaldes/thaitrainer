@@ -1,0 +1,14 @@
+<div class="result">
+  <div>
+    <label for="gCount">Guesses:</label><br />
+    <span id="gCount">{{gameState.guesses}}</span>
+  </div>
+  <div>
+    <label for="gRight">Right:</label><br />
+    <span id="gWrong">{{gameState.correctGuesses}}</span>
+  </div>
+  <div>
+    <label for="gScore">Score:</label><br />
+    <span id="gScore">{{gameState.score() | percent}}</span>
+  </div>
+</div>

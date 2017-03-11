@@ -1,0 +1,10 @@
+div.result {
+  text-align: center;
+  padding-top: 20px;
+}
+div.result label {
+  font-size: 26pt;
+}
+div.result span {
+  font-size: 36pt;
+}

@@ -12,6 +12,9 @@ export const enum GameMode {
 export class GameState {
 
   mode: GameMode = GameMode.BROWSE;
+
+  finished = false;
+  maxGuesses = CONSONANTS.length;
   guesses = 0;
   correctGuesses = 0;
   guessing = false;
@@ -20,6 +23,7 @@ export class GameState {
   consonant: Consonant = CONSONANTS[0];
   
   reset(): void {
+    this.finished = false;
     this.guesses = 0;
     this.correctGuesses = 0;
     this.guessing = false;
@@ -30,6 +34,10 @@ export class GameState {
 
   score(): number {
     return this.guesses == 0 ? 0 : this.correctGuesses / this.guesses;
+  }
+
+  progress(): number {
+    return this.guesses / this.maxGuesses;
   }
 
   public isGuessClass(): boolean {
@@ -108,6 +116,9 @@ export class GameService {
     } 
     this.gameState.guessing = false;
     this.gameState.wrong = !right;
+    if (this.gameState.guesses >= this.gameState.maxGuesses) {
+      this.gameState.finished = true;
+    }
     this.stateChanged.emit(this.gameState);
   }
 

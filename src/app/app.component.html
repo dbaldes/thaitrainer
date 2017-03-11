@@ -7,6 +7,8 @@
     <span id="gWrong">{{gameState().guesses - gameState().correctGuesses}}</span>
     <label for="gScore">Score:</label>
     <span id="gScore">{{gameState().score() | percent}}</span>
+    <label for="gProgress">Progress:</label>
+    <span id="gProgress">{{gameState().progress() | percent}}</span>
   </div>
 </div>
 <div *ngIf="!gameState().isRunning()" >

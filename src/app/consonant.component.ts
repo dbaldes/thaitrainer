@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, Params }   from '@angular/router';
+import { Router, ActivatedRoute, Params }   from '@angular/router';
 import { Location }                 from '@angular/common';
 
 import 'rxjs/add/operator/switchMap';
@@ -24,8 +24,8 @@ export class ConsonantComponent implements OnInit {
 
   constructor(
     private gameService: GameService,
-    private route: ActivatedRoute,
-    private location: Location) {
+    private router: Router,
+    private route: ActivatedRoute) {
 
     this.gameState = gameService.gameState;
   }
@@ -59,6 +59,10 @@ export class ConsonantComponent implements OnInit {
     this.gameService.next();
   }
 
+  public showScore(): void {
+    this.router.navigate(['/result']);
+  }
+
   guessClass(guess: string): void {
     this.gameService.guess(guess === this.consonant.charclass);
   }
@@ -67,7 +71,4 @@ export class ConsonantComponent implements OnInit {
     this.gameService.guess(guess === this.consonant.roman.substring(0,1));
   }
 
-  goBack(): void {
-    this.location.back();
-  }
 }

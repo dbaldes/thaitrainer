@@ -1,25 +1,34 @@
 <div *ngIf="consonant" >
-  <div class="consonant" >{{consonant.character}}</div>
-  <div *ngIf="!(gameState.isGuessPhonetic() && gameState.guessing)" class="roman"
+  <div class="consdisplay" >
+    <div class="consonant" >{{consonant.character}}</div>
+    <div class="metadata" >
+    <div *ngIf="!(gameState.isGuessPhonetic() && gameState.guessing)" class="roman"
        [class.wrong]="gameState.isGuessPhonetic() && gameState.wrong"
        [class.right]="gameState.isGuessPhonetic() && !gameState.wrong"
        >{{consonant.roman}}</div>
-  <div *ngIf="!(gameState.isGuessPhonetic() && gameState.guessing)" class="phonetic"
+    <div *ngIf="!(gameState.isGuessPhonetic() && gameState.guessing)" class="phonetic"
        [class.wrong]="gameState.isGuessPhonetic() && gameState.wrong"
        [class.right]="gameState.isGuessPhonetic() && !gameState.wrong"
        >{{consonant.phonetic}}</div>
-  <div *ngIf="!(gameState.isGuessClass() && gameState.guessing)" class="charclass"
+    <div *ngIf="!(gameState.isGuessClass() && gameState.guessing)" class="charclass"
        [class.wrong]="gameState.isGuessClass() && gameState.wrong"
        [class.right]="gameState.isGuessClass() && !gameState.wrong"
        >{{characterClass}}</div>
+    </div>
+  </div>
   <div *ngIf="gameState.isGuessClass()" class="charclass" >
     <div *ngIf="gameState.guessing" >
       <button (click)="guessClass('l')" >low</button>
       <button (click)="guessClass('m')" >middle</button>
       <button (click)="guessClass('h')" >high</button>
     </div>
-    <div *ngIf="!gameState.guessing" >
+  </div>
+  <div *ngIf="gameState.isRunning()" class="gameNav" >
+    <div *ngIf="!gameState.guessing && !gameState.finished" >
       <button (click)="gameNext()" >&rArr;</button>
+    </div>
+    <div *ngIf="!gameState.guessing && gameState.finished" >
+      <button (click)="showScore()" >Show Result</button>
     </div>
   </div>
 </div>
