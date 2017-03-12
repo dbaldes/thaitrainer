@@ -13,6 +13,8 @@ export class AppComponent implements OnInit {
 
   gameState: GameState;
 
+  public navCollapsed: boolean = true;
+
   constructor(private gameService: GameService) {
     this.gameState = gameService.gameState;  
   }
