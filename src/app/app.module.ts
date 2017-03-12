@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ProgressbarModule } from 'ng2-bootstrap/progressbar';
-import { CollapseDirective } from 'ng2-bootstrap'
+import { CollapseModule } from 'ng2-bootstrap/collapse';
 
 import { AppComponent } from './app.component';
 import { ConsonantComponent } from './consonant.component';
@@ -15,7 +15,6 @@ import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
-    CollapseDirective,
     AppComponent,
     ConsonantComponent,
     BrowseComponent,
@@ -26,6 +25,7 @@ import { AppRoutingModule } from './app-routing.module';
     BrowserModule,
     FormsModule,
     ProgressbarModule.forRoot(),
+    CollapseModule.forRoot(),
     AppRoutingModule
   ],
   providers: [GameService],
