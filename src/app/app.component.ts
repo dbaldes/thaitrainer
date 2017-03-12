@@ -28,11 +28,11 @@ export class AppComponent implements OnInit {
   }
 
   startGameClass() {
-    this.gameService.start(GameMode.GUESS_CLASS);
+    this.router.navigate(['/game', 'class']);
   }
 
   startGamePhonetic() {
-    this.gameService.start(GameMode.GUESS_PHONETIC);
+    this.router.navigate(['/game', 'phonetic']);
   }
 
   browse() {

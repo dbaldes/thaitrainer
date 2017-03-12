@@ -2,37 +2,18 @@
   <div class="consdisplay" >
     <div class="consonant" >{{consonant.character}}</div>
     <div class="metadata" >
-    <div *ngIf="!(gameState.isGuessPhonetic() && gameState.guessing)" class="roman"
-       [class.wrong]="gameState.isGuessPhonetic() && gameState.wrong"
-       [class.right]="gameState.isGuessPhonetic() && !gameState.wrong"
+    <div *ngIf="showPhonetic" class="roman"
+       [class.wrong]="gamePhonetic && gameWrong"
+       [class.right]="gamePhonetic && !gameWrong"
        >{{consonant.roman}}</div>
-    <div *ngIf="!(gameState.isGuessPhonetic() && gameState.guessing)" class="phonetic"
-       [class.wrong]="gameState.isGuessPhonetic() && gameState.wrong"
-       [class.right]="gameState.isGuessPhonetic() && !gameState.wrong"
+    <div *ngIf="showPhonetic" class="phonetic"
+       [class.wrong]="gamePhonetic && gameWrong"
+       [class.right]="gamePhonetic && !gameWrong"
        >{{consonant.phonetic}}</div>
-    <div *ngIf="!(gameState.isGuessClass() && gameState.guessing)" class="charclass"
-       [class.wrong]="gameState.isGuessClass() && gameState.wrong"
-       [class.right]="gameState.isGuessClass() && !gameState.wrong"
-       >{{characterClass}}</div>
+    <div *ngIf="showClass" class="charclass"
+       [class.wrong]="gameClass && gameWrong"
+       [class.right]="gameClass && !gameWrong"
+       >{{getCharacterClass()}}</div>
     </div>
-  </div>
-  <div *ngIf="gameState.isGuessClass()" class="charclass" >
-    <div *ngIf="gameState.guessing" >
-      <button (click)="guessClass('l')" >low</button>
-      <button (click)="guessClass('m')" >middle</button>
-      <button (click)="guessClass('h')" >high</button>
-    </div>
-  </div>
-  <div *ngIf="gameState.isRunning()" class="gameNav" >
-    <div *ngIf="!gameState.guessing && !gameState.finished" >
-      <button (click)="gameNext()" >&rArr;</button>
-    </div>
-    <div *ngIf="!gameState.guessing && gameState.finished" >
-      <button (click)="showScore()" >Show Result</button>
-    </div>
-  </div>
-  <div *ngIf="!gameState.isRunning()" class="gameNav" >
-      <button (click)="prev()" >&larr;</button>
-      <button (click)="next()" >&rarr;</button>
   </div>
 </div>

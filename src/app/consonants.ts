@@ -46,3 +46,6 @@ export const CONSONANTS: Consonant[] = [
  {id: 43, character: "อ", "phonetic": "ʔɔː ʔàːŋ", "roman": "o ang", charclass: "m" },
  {id: 44, character: "ฮ", "phonetic": "hɔː nók hûːk", "roman": "ho nokhug", charclass: "l" }
 ];
+
+export const PHONETICS: String[] = [
+ "b","c","d","f","g","h","k","l","m","n","o","p","r","s","t","w","y"];

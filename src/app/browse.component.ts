@@ -1,0 +1,46 @@
+import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute, Params }   from '@angular/router';
+
+import 'rxjs/add/operator/switchMap';
+
+import { Consonant } from './consonant';
+import { GameService } from './game.service';
+
+@Component({
+  moduleId: module.id,
+  templateUrl: './browse.component.html',
+  styleUrls: ['./consonant.component.css']
+})
+export class BrowseComponent implements OnInit {
+
+  currentConsonant: Consonant;
+
+  constructor(
+    private gameService: GameService,
+    private router: Router,
+    private route: ActivatedRoute) {
+  }
+
+  setCurrentConsonant(consonant: Consonant) {
+    this.currentConsonant = consonant;
+  }
+
+  ngOnInit(): void {
+     this.route.params
+      .switchMap((params: Params) => this.gameService.getConsonant(+params['id']))
+      .subscribe(consonant => this.setCurrentConsonant(consonant));
+  }
+
+  public next(): void {
+    let id = this.currentConsonant.id + 1;
+    if (id > 44) { id = 1; }
+    this.router.navigate(['/consonant', id]);
+  }
+
+  public prev(): void {
+    let id = this.currentConsonant.id - 1;
+    if (id == 0) { id = 44; }
+    this.router.navigate(['/consonant', id]);
+  }
+
+}

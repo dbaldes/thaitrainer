@@ -4,11 +4,15 @@
     <span id="gCount">{{gameState.guesses}}</span>
   </div>
   <div>
-    <label for="gRight">Right:</label><br />
+    <label for="gRight">Correct:</label><br />
     <span id="gWrong">{{gameState.correctGuesses}}</span>
   </div>
   <div>
     <label for="gScore">Score:</label><br />
     <span id="gScore">{{gameState.score() | percent}}</span>
+  </div>
+  <div>
+    <label for="gAss"> </label><br />
+    <span id="gScore">{{rating()}}</span>
   </div>
 </div>
