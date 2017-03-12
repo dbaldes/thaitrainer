@@ -74,7 +74,9 @@ export class GameService {
   }
 
   stop(): void {
-    this.start(GameMode.BROWSE);
+    if (this.gameState.isRunning()) {
+      this.start(GameMode.BROWSE);
+    }
   }
 
   next(): void {
@@ -82,11 +84,7 @@ export class GameService {
     if (this.gameState.currentPosition >= this.consonants.length) {
       this.gameState.currentPosition = 0;
     }
-    this.gameState.consonant = this.consonants[this.gameState.currentPosition];
-    if (this.gameState.mode != GameMode.BROWSE) {
-      this.gameState.guessing = true;
-    }
-    this.stateChanged.emit(this.gameState);
+    this.updateState();
   }
 
   prev(): void {
@@ -94,8 +92,12 @@ export class GameService {
     if (this.gameState.currentPosition < 0) {
       this.gameState.currentPosition = this.consonants.length - 1;
     }
+    this.updateState();
+  }
+  
+  updateState(): void {
     this.gameState.consonant = this.consonants[this.gameState.currentPosition];
-    if (this.gameState.mode != GameMode.BROWSE) {
+    if (this.gameState.isRunning()) {
       this.gameState.guessing = true;
     }
     this.stateChanged.emit(this.gameState);
@@ -125,7 +127,6 @@ export class GameService {
   getConsonant(id: number): Promise<Consonant> {
     return Promise.resolve(CONSONANTS.find(consonant => consonant.id === id));
   }
-
 
   shuffle(a: Consonant[]): void {
     for(let i = a.length; i; i--) {

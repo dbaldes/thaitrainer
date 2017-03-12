@@ -1,0 +1,11 @@
+div.gameNav button {
+  font-size: 14pt;
+  font-weight: bold;
+  margin: 2px;
+}
+button.wideButton {
+  width: 10em;
+}
+div.gameNav {
+  padding-top: 10px;
+}

@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
-import { GameService, GameState } from './game.service'
+import { GameState } from './game.service'
 
 @Component({
   moduleId: module.id,
@@ -10,6 +10,7 @@ import { GameService, GameState } from './game.service'
 })
 export class ResultComponent {
 
+  @Input()
   gameState: GameState;
 
   RATINGS: string[] = [
@@ -20,10 +21,6 @@ export class ResultComponent {
     "Well done!",
     "Simply perfect!"
   ];
-
-  constructor( private gameService: GameService) {
-    this.gameState = gameService.gameState;
-  }
 
   rating(): string {
     let score = this.gameState.score();

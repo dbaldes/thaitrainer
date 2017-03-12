@@ -2,18 +2,18 @@
   <div class="consdisplay" >
     <div class="consonant" >{{consonant.character}}</div>
     <div class="metadata" >
-    <div *ngIf="showPhonetic" class="roman"
-       [class.wrong]="gamePhonetic && gameWrong"
-       [class.right]="gamePhonetic && !gameWrong"
-       >{{consonant.roman}}</div>
-    <div *ngIf="showPhonetic" class="phonetic"
-       [class.wrong]="gamePhonetic && gameWrong"
-       [class.right]="gamePhonetic && !gameWrong"
-       >{{consonant.phonetic}}</div>
-    <div *ngIf="showClass" class="charclass"
-       [class.wrong]="gameClass && gameWrong"
-       [class.right]="gameClass && !gameWrong"
-       >{{getCharacterClass()}}</div>
+      <div *ngIf="showPhonetic" class="roman"
+          [class.wrong]="gamePhonetic && gameWrong"
+          [class.right]="gamePhonetic && !gameWrong"
+          >{{consonant.roman}}</div>
+      <div *ngIf="showPhonetic" class="phonetic"
+          [class.wrong]="gamePhonetic && gameWrong"
+          [class.right]="gamePhonetic && !gameWrong"
+          >{{consonant.phonetic}}</div>
+      <div *ngIf="showClass" class="charclass"
+          [class.wrong]="gameClass && gameWrong"
+          [class.right]="gameClass && !gameWrong"
+          >{{getCharacterClass()}}</div>
     </div>
   </div>
 </div>

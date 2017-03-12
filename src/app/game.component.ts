@@ -10,13 +10,16 @@ import { GameService, GameMode, GameState } from './game.service'
 @Component({
   moduleId: module.id,
   templateUrl: './game.component.html',
-  styleUrls: ['./consonant.component.css']
+  styleUrls: ['./game.component.css']
 })
 export class GameComponent implements OnInit {
 
-  gameState: GameState;
-
   phonetics = PHONETICS;
+
+  gameState: GameState;
+  showResult = false;
+
+  private gameStateSubscription;
 
   constructor(
     private gameService: GameService,
@@ -28,12 +31,17 @@ export class GameComponent implements OnInit {
 
   onChangeGameState(gameState: GameState) {
     this.gameState = gameState;
+    if (gameState.mode == GameMode.BROWSE) {
+      this.router.navigate(['/']);
+    }
   }
 
   gameModeByParam(gtype: string): GameMode {
     return gtype == 'class' 
       ? GameMode.GUESS_CLASS
-      : GameMode.GUESS_PHONETIC;
+      : gtype == 'phonetic' 
+        ? GameMode.GUESS_PHONETIC
+        : GameMode.BROWSE;
   }
 
   ngOnInit(): void {
@@ -42,15 +50,29 @@ export class GameComponent implements OnInit {
           Promise.resolve(this.gameModeByParam(params['type']))
       )
       .subscribe(mode => this.gameService.start(mode));
-     this.gameService.stateChanged.subscribe(
+     this.gameStateSubscription = this.gameService.stateChanged.subscribe(
       (gameState) => {
         this.onChangeGameState(gameState);
       }
      );
   }
 
+  stop(): void {
+    this.gameService.stop();
+  }
+  
+  again(): void {
+    this.showResult = false;
+    this.gameService.start(this.gameState.mode);
+  }
+
+  ngOnDestroy(): void {
+    this.gameStateSubscription.unsubscribe();
+    this.gameService.stop();
+  }
+
   public showScore(): void {
-    this.router.navigate(['/result']);
+    this.showResult = true;
   }
 
   public gameNext(): void {

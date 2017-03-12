@@ -1,0 +1,20 @@
+div.browseButtons {
+  width: 100%;
+  text-align: center;
+}
+div.browseButtons button {
+  font-size: 14pt;
+  font-weight: bold;
+  margin: 2px;
+  padding: 0px;
+  width: 24pt;
+  height: 24pt;
+}
+div.gameNav button {
+  font-size: 14pt;
+  font-weight: bold;
+  margin: 2px;
+}
+div.gameNav {
+  padding-top: 10px;
+}

@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 
-import { Consonant } from './consonant';
-import { CONSONANTS } from './consonants';
-import { GameService, GameMode, GameState } from './game.service';
+import { GameService, GameState } from './game.service';
 
 @Component({
   moduleId: module.id,
@@ -14,34 +11,17 @@ import { GameService, GameMode, GameState } from './game.service';
 export class AppComponent implements OnInit {
   title = 'ThaiTrainer';
 
-  consonants: Consonant[] = CONSONANTS;
+  gameState: GameState;
 
-  constructor(
-    private gameService: GameService,
-    private router: Router) { }
-
+  constructor(private gameService: GameService) {
+    this.gameState = gameService.gameState;  
+  }
+  
   ngOnInit(): void {
-  }
-
-  gotoConsonant(id) {
-    this.router.navigate(['/consonant', id]);
-  }
-
-  startGameClass() {
-    this.router.navigate(['/game', 'class']);
-  }
-
-  startGamePhonetic() {
-    this.router.navigate(['/game', 'phonetic']);
-  }
-
-  browse() {
-    let cid = this.gameService.getCurrent().id;
-    this.gameService.stop();
-    this.gotoConsonant(cid);
-  }
-
-  public gameState(): GameState {
-    return this.gameService.gameState;
+    this.gameService.stateChanged.subscribe(
+      (gameState) => {
+         this.gameState = gameState;
+      }
+    );
   }
 }

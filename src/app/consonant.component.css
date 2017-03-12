@@ -1,34 +1,25 @@
 div.consonant {
   font-size: 128pt;
 }
+div.metadata {
+  height: 120px;
+  font-family: sans-serif;
+}
+
 div.roman {
   font-size: 26pt;
 }
+div.phonetic {
+  font-size: 12pt;
+}
 div.charclass {
-  margin-top: 5px;
   font-size: 26pt;
 }
+
 div.wrong {
   color: red;
 }
 div.right {
   color: green;
 }
-div.metadata {
-  height: 120px;
-  font-family: sans-serif;
-}
 
-div.charclass button {
-  font-size: 26pt;
-  font-weight: bold;
-}
-div.phonetic button {
-  font-size: 14pt;
-  font-weight: bold;
-}
-
-div.gameNav button {
-  font-size: 26pt;
-  font-weight: bold;
-}

@@ -1,3 +1,13 @@
+<div *ngIf="!showResult" >
+  <div class="statusRow" >
+    <progressbar [value]="gameState.guesses" [max]="gameState.maxGuesses" >{{gameState.progress() | percent:'1.1-1'}}</progressbar>
+    <label for="gRight">Good:</label>
+    <span id="gRight">{{gameState.correctGuesses}}</span>
+    <label for="gWrong">Bad:</label>
+    <span id="gWrong">{{gameState.guesses - gameState.correctGuesses}}</span>
+    <label for="gScore">Score:</label>
+    <span id="gScore">{{gameState.score() | percent}}</span>
+  </div>
   <display-consonant
     [consonant]="gameState.consonant"
     [gameClass]="gameState.isGuessClass()"
@@ -6,27 +16,30 @@
     [showPhonetic]="!(gameState.isGuessPhonetic() && gameState.guessing)"
     [gameWrong]="gameState.wrong"
   ></display-consonant>
-  <div *ngIf="gameState.isGuessClass()" class="charclass" >
-    <div *ngIf="gameState.guessing" >
-      <button (click)="guessClass('l')" >low</button>
-      <button (click)="guessClass('m')" >middle</button>
-      <button (click)="guessClass('h')" >high</button>
+  <div *ngIf="gameState.isGuessClass() && gameState.guessing" class="gameNav" >
+    <button (click)="guessClass('l')" class="btn btn-sm btn-primary" >low</button>
+    <button (click)="guessClass('m')" class="btn btn-sm btn-primary" >middle</button>
+    <button (click)="guessClass('h')" class="btn btn-sm btn-primary" >high</button>
+  </div>
+  <div *ngIf="gameState.isGuessPhonetic() && gameState.guessing" class="gameNav" >
+    <button *ngFor="let p of phonetics" (click)="guessPhonetic(p)" class="btn btn-sm btn-primary" >{{p | uppercase}}</button>
+  </div>
+  <div *ngIf="gameState.isRunning() && !gameState.guessing" class="gameNav" >
+    <div *ngIf="!gameState.finished" >
+      <button (click)="gameNext()" class="btn btn-sm btn-success wideButton" >&rArr;</button>
+    </div>
+    <div *ngIf="gameState.finished" >
+      <button (click)="showScore()" class="btn btn-sm btn-success" >Show Result</button>
     </div>
   </div>
-  <div *ngIf="gameState.isGuessPhonetic()" class="phonetic" >
-    <div *ngIf="gameState.guessing" >
-      <button *ngFor="let p of phonetics" (click)="guessPhonetic(p)" >{{p | uppercase}}</button>
-    </div>
+  <div class="gameNav" >
+    <button (click)="showScore()" class="btn btn-danger wideButton" >Quit</button>
   </div>
-  <div *ngIf="gameState.isRunning()" class="gameNav" >
-    <div *ngIf="!gameState.guessing && !gameState.finished" >
-      <button (click)="gameNext()" >&rArr;</button>
-    </div>
-    <div *ngIf="!gameState.guessing && gameState.finished" >
-      <button (click)="showScore()" >Show Result</button>
-    </div>
+</div>
+<div *ngIf="showResult" >
+  <display-result [gameState]="gameState" ></display-result>
+  <div class="gameNav" >
+    <button (click)="again()" class="btn btn-lg btn-success wideButton" >Try Again</button>
+    <button (click)="stop()" class="btn btn-lg btn-danger wideButton" >Give UP</button>
   </div>
-  <div *ngIf="!gameState.isRunning()" class="gameNav" >
-      <button (click)="prev()" >&larr;</button>
-      <button (click)="next()" >&rarr;</button>
-  </div>
+</div>
